@@ -15,7 +15,10 @@ use mirl_input::mouse::{MouseButton, MouseButtonState};
 use mirl_system::traits::WindowRenderLayer;
 
 use crate::windowing::traits::MouseInput;
-#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all(compactly = false))]
+#[cfg_attr(
+    feature = "mirl_derive",
+    mirl_derive::derive_all(compactly = false, zerocopy = false)
+)]
 #[allow(clippy::struct_excessive_bools)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 /// Settings for spawning in a window

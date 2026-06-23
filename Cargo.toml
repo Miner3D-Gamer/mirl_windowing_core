@@ -5,7 +5,7 @@ edition.workspace = true
 repository.workspace = true
 
 [dependencies]
-mirl_core = { version = "0.0.0-alpha", features = ["mirl_windowing_support"] }
+# mirl_core = { version = "0.0.0-alpha" }
 mirl_extensions = { version = "0.0.0-alpha" }
 mirl_system = { version = "0.0.0-alpha" }
 mirl_input = { version = "0.0.0-alpha" }
@@ -24,7 +24,7 @@ bitcode = { version = "0.6.9", optional = true, default-features = false, featur
     "derive",
 ] }
 wincode = { version = "0.5.3", optional = true, features = ["derive"] }
-zerocopy = { version = "0.8.48", optional = true, default-features = false, features = [
+zerocopy = { version = "0.8.48", optional = true, features = [
     "float-nightly",
     "derive",
 ] }
@@ -69,31 +69,11 @@ all_codecs = ["serde", "bitcode", "wincode", "compactly", "zerocopy"]
 all_enum_extensions = ["strum", "enum_ext"]
 
 # Codec stuff
-serde = ["dep:serde", "mirl_derive", "mirl_core/serde", "mirl_system/serde"]
-bitcode = [
-    "dep:bitcode",
-    "mirl_derive",
-    "mirl_core/bitcode",
-    "mirl_system/bitcode",
-]
-wincode = [
-    "dep:wincode",
-    "mirl_derive",
-    "mirl_core/wincode",
-    "mirl_system/wincode",
-]
-compactly = [
-    "dep:compactly",
-    "mirl_derive",
-    "mirl_core/compactly",
-    "mirl_system/compactly",
-]
-zerocopy = [
-    "dep:zerocopy",
-    "mirl_derive",
-    "mirl_core/zerocopy",
-    "mirl_system/zerocopy",
-]
+serde = ["dep:serde", "mirl_derive", "mirl_system/serde"]
+bitcode = ["dep:bitcode", "mirl_derive", "mirl_system/bitcode"]
+wincode = ["dep:wincode", "mirl_derive", "mirl_system/wincode"]
+compactly = ["dep:compactly", "mirl_derive", "mirl_system/compactly"]
+zerocopy = ["dep:zerocopy", "mirl_derive", "mirl_system/zerocopy"]
 
 # Enum extensions
 strum = ["dep:strum", "mirl_derive"]

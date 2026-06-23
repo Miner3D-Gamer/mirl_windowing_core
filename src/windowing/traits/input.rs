@@ -1,4 +1,4 @@
-use mirl_core::platform::KeyCode;
+use mirl_input::keyboard::KeyCode;
 use mirl_input::mouse::MouseButton;
 
 /// Basic input detection

@@ -1,6 +1,6 @@
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 /// Potential errors that may occur when trying to open a window
-#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all)]
+#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all(zerocopy = false))]
 pub enum WindowCreationError {
     /// The given backend could not load itself before even opening the window
     BackendFailedToLoad,
@@ -12,7 +12,7 @@ pub enum WindowCreationError {
     Misc(String),
 }
 
-#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all)]
+#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all(zerocopy = false))]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 /// Potential errors that may occur when trying to update a window
 pub enum WindowUpdateError {
@@ -39,7 +39,7 @@ impl From<WindowUpdateError> for WindowError {
     }
 }
 
-#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all)]
+#[cfg_attr(feature = "mirl_derive", mirl_derive::derive_all(zerocopy = false))]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 /// An enum for checking what kind of error was produced
 pub enum WindowError {
@@ -139,9 +139,7 @@ impl std::fmt::Display for WindowError {
             Self::DuplicateWindow => {
                 write!(f, "A window already exists")
             }
-            Self::FileAccessNotPossible {
-                path,
-            } => {
+            Self::FileAccessNotPossible { path } => {
                 write!(f, "Unable to access file: {path}")
             }
             Self::UnableToLoadIcon => {
