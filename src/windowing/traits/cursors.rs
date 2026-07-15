@@ -22,18 +22,12 @@ pub const trait ManageCursorStyle<Cursor> {
     ///
     /// # Errors
     /// [`LoadCursorError`]
-    fn load_custom_cursor(
-        &mut self,
-        cursor: RawCursor,
-    ) -> Result<Cursor, LoadCursorError>;
+    fn load_custom_cursor(&mut self, cursor: RawCursor) -> Result<Cursor, LoadCursorError>;
     /// Set what cursors the os should display on the current window
     ///
     /// # Errors
     /// See [`WindowError`]
-    fn set_cursor_style(
-        &mut self,
-        style: &Cursor,
-    ) -> Result<(), UseCursorError>;
+    fn set_cursor_style(&mut self, style: &Cursor) -> Result<(), UseCursorError>;
 }
 
 // /// Control over the cursor style while the mouse of hovering over it

@@ -6,33 +6,104 @@ repository.workspace = true
 
 [features]
 default = ["std"]
-std = []
+std = [
+    "bitcode?/std",
+    "mirl_buffer/std",
+    "mirl_extensions/std",
+    "raw-window-handle/std",
+    "serde?/std",
+    "strum?/std",
+    "wincode?/std",
+    "zerocopy?/std",
+    "wasm-bindgen/std",
+    "web-sys/std",
+]
 all = [
     "all_codecs",
-    # "minifb", "glfw"
     "all_enum_extensions",
+    "mirl_buffer/all",
+    "mirl_extensions/all",
+    "mirl_input/all",
+    "mirl_system/all",
 ]
 _checking = ["all"]
 # _checking = []
 # Does nothing by itself. Needs another codec or enum flag to do something
-mirl_derive = ["dep:mirl_derive"]
+mirl_derive = [
+    "dep:mirl_derive",
+    "mirl_buffer/mirl_derive",
+    "mirl_input/mirl_derive",
+    "mirl_system/mirl_derive",
+]
 # Compatibility with ffi
-c_compatible = ["mirl_derive"]
+c_compatible = [
+    "mirl_derive",
+    "mirl_buffer/c_compatible",
+    "mirl_extensions/c_compatible",
+    "mirl_input/c_compatible",
+    "mirl_system/c_compatible",
+]
 # Enables all codecs
-all_codecs = ["serde", "bitcode", "wincode", "compactly", "zerocopy"]
+all_codecs = [
+    "serde",
+    "bitcode",
+    "wincode",
+    "compactly",
+    "zerocopy",
+    "mirl_buffer/all_codecs",
+    "mirl_input/all_codecs",
+    "mirl_system/all_codecs",
+]
 # All enum extensions
-all_enum_extensions = ["strum", "enum_ext"]
+all_enum_extensions = [
+    "strum",
+    "enum_ext",
+    "mirl_input/all_enum_extensions",
+    "mirl_system/all_enum_extensions",
+]
 # Codec stuff
-serde = ["dep:serde", "mirl_derive", "mirl_system/serde"]
-bitcode = ["dep:bitcode", "mirl_derive", "mirl_system/bitcode"]
-wincode = ["dep:wincode", "mirl_derive", "mirl_system/wincode"]
-compactly = ["dep:compactly", "mirl_derive", "mirl_system/compactly"]
-zerocopy = ["dep:zerocopy", "mirl_derive", "mirl_system/zerocopy"]
+serde = [
+    "dep:serde",
+    "mirl_derive",
+    "mirl_system/serde",
+    "bitcode?/serde",
+    "mirl_buffer/serde",
+    "mirl_input/serde",
+    "wasm-bindgen/serde",
+]
+bitcode = [
+    "dep:bitcode",
+    "mirl_derive",
+    "mirl_system/bitcode",
+    "mirl_buffer/bitcode",
+    "mirl_input/bitcode",
+]
+wincode = [
+    "dep:wincode",
+    "mirl_derive",
+    "mirl_system/wincode",
+    "mirl_buffer/wincode",
+    "mirl_input/wincode",
+]
+compactly = [
+    "dep:compactly",
+    "mirl_derive",
+    "mirl_system/compactly",
+    "mirl_buffer/compactly",
+    "mirl_input/compactly",
+]
+zerocopy = [
+    "dep:zerocopy",
+    "mirl_derive",
+    "mirl_system/zerocopy",
+    "mirl_buffer/zerocopy",
+    "mirl_input/zerocopy",
+]
 # Enum extensions
-strum = ["dep:strum", "mirl_derive"]
-enum_ext = ["dep:enum_ext", "mirl_derive"]
-# keyboard_query = ["mirl/keyboard_query"]
-cursor_show_hotspot = []
+strum = ["dep:strum", "mirl_derive", "mirl_input/strum", "mirl_system/strum"]
+enum_ext = ["dep:enum_ext", "mirl_derive", "mirl_input/enum_ext", "mirl_system/enum_ext"]
+# keyboard_query = ["mirl?/keyboard_query"]
+cursor_show_hotspot = ["mirl_input/cursor_show_hotspot"]
 
 [dependencies]
 bitcode = { version = "0.6", optional = true, default-features = false, features = [
@@ -48,10 +119,10 @@ mirl_derive = { version = "0.0.0-alpha", optional = true }
 mirl_extensions = { version = "0.0.0-alpha" }
 mirl_input = { version = "0.0.0-alpha" }
 mirl_system = { version = "0.0.0-alpha" }
-# For random numbers
-rand = { version = "0.10", optional = true, default-features = false, features = [
-    "thread_rng",
-] }
+# # For random numbers
+# rand = { version = "0.10", optional = true, default-features = false, features = [
+#     "thread_rng",
+# ] }
 # system
 raw-window-handle = { version = "0.6", default-features = false }
 serde = { version = "1.0", optional = true, default-features = false, features = [
